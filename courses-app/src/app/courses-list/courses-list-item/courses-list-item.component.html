@@ -1,3 +1,16 @@
-<p>
-  courses-list-item works!
-</p>
+<li>
+  <div>
+    <span>{{courseData.title}} </span>
+    <span>{{courseData.duration}} </span>
+    <span>{{courseData.creationDate | date:'shortTime'}}</span>
+  </div>
+
+  <div>
+    <p>{{courseData.description}}</p>
+  </div>
+
+  <div>
+    <button>Edit</button>
+    <button (click)=deleteCourse()>Delete</button>
+  </div>
+</li>

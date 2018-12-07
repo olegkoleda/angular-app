@@ -1,4 +1,4 @@
-import { ICourse } from './course.model';
+import { ICourse } from '../interfaces/course.model';
 
 export class Course implements ICourse {
     public id: number;

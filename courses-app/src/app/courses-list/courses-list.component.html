@@ -1,3 +1,13 @@
-<p>
-  courses-list works!
-</p>
+<app-courses-controls></app-courses-controls>
+
+<section>
+    <ul>
+        <app-courses-list-item 
+        *ngFor="let courseData of coursesData" 
+        [courseData]="courseData"
+        (logId)="logCourseId($event)"
+        ></app-courses-list-item>
+    </ul>
+</section>
+
+<app-load-more></app-load-more>

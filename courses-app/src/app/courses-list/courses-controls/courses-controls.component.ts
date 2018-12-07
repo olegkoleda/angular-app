@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesControlsComponent implements OnInit {
 
+  public value: string = '';
   constructor() { }
 
+  public logSearchValue() {
+    console.log(this.value);
+  }
   ngOnInit() {
   }
 

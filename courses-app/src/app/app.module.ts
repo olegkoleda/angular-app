@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesListItemComponent } from './courses-list/courses-list-item/courses-list-item.component';
 import { CoursesControlsComponent } from './courses-list/courses-controls/courses-controls.component';
 import { BreadcrumbsComponent } from './header/breadcrumbs/breadcrumbs.component';
+import { LoadMoreComponent } from './courses-list/load-more/load-more.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { BreadcrumbsComponent } from './header/breadcrumbs/breadcrumbs.component
     CoursesListComponent,
     CoursesListItemComponent,
     CoursesControlsComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    LoadMoreComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

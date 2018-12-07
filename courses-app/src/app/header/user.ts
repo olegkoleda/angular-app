@@ -1,4 +1,4 @@
-import { IUser } from './user.model';
+import { IUser } from '../interfaces/user.model';
 
 export class User implements IUser {
     public id: number;
