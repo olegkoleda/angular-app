@@ -1,7 +1,7 @@
-<li>
-  <div>
-    <span>{{courseData.title}} </span>
-    <span>{{courseData.duration}} </span>
+<li class="courses--list__item">
+  <div class="list-item">
+    <span class="list-item--title">{{courseData.title}} </span>
+    <span>{{courseData.duration}} min </span>
     <span>{{courseData.creationDate | date:'shortTime'}}</span>
   </div>
 
@@ -9,7 +9,7 @@
     <p>{{courseData.description}}</p>
   </div>
 
-  <div>
+  <div class="list-item--controls">
     <button>Edit</button>
     <button (click)=deleteCourse()>Delete</button>
   </div>

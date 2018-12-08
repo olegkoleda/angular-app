@@ -1,0 +1,22 @@
+@import '../../../variables';
+
+.courses--list__item {
+  background: $white-color;
+  padding: 1.5rem; 
+
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-around;
+
+  &--title {
+    color: $blue-text-color;
+    font-size: 2rem;
+  }
+
+  &--controls {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

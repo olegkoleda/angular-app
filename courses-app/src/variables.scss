@@ -1,0 +1,31 @@
+/* Fonts*/
+@font-face{
+  font-family: "Karla-regular";
+  src: url("/assets/fonts/Karla/Karla-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face{
+  font-family: "Karla-bold";
+  src: url("/assets/fonts/Karla/Karla-Bold.ttf");
+  font-weight: 700;
+}
+
+$primary-font-family: Karla-regular, Arial, Helvetica, sans-serif;
+$primary-bold-font-family: Karla-bold, Arial, Helvetica, sans-serif;
+$primary-font-size: 10px;
+
+/* Colors*/
+$orange-color: #FE7F64;
+$blue-color: #7BC4EF;
+$grey-color: #C6CAD3;
+$white-color: #fff;
+$blue-text-color: #A8D7F3;
+$grey-text-color: #6C738D;
+$white-text-color: #fff;
+
+$primary-text-color: $grey-text-color;
+$logo-text-color: $orange-color;
+$primary-button-color: $blue-color;
+$active-button-color: darken($primary-button-color, 10);
+$color-blue: blue;

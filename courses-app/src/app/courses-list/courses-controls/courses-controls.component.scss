@@ -1,0 +1,11 @@
+.courses-controls {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+    
+  &--wrapper {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
