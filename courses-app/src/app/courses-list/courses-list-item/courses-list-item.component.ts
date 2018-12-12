@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Course } from '../course';
+import { Course } from '../course.module';
 
 @Component({
   selector: 'app-courses-list-item',
@@ -9,7 +9,7 @@ import { Course } from '../course';
 export class CoursesListItemComponent implements OnInit {
 
   @Input() courseData: Course;
-  @Output() logId: EventEmitter<number> = new EventEmitter<number>(); 
+  @Output() logId: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
@@ -17,7 +17,7 @@ export class CoursesListItemComponent implements OnInit {
   }
 
   deleteCourse() {
-    this.logId.emit(this.courseData.id); 
+    this.logId.emit(this.courseData.id);
   }
 
 }
