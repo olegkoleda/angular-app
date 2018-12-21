@@ -19,7 +19,7 @@ class TestHostComponent {
   public deleteCourse(deletedCourseId: number) { this.deletedCourseId = deletedCourseId; }
 }
 
-describe('CoursesListItemComponent', () => {
+describe('CoursesListItemComponent test-host', () => {
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
@@ -37,14 +37,11 @@ describe('CoursesListItemComponent', () => {
 
   it('should create', () => {
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    console.log(testHost, compiled);
     expect(testHost).toBeTruthy();
   });
 
   it('should delete course', () => {
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
     const deleteButton =  fixture.debugElement.query(By.css('.list-item--controls :last-child'));
     deleteButton.triggerEventHandler('click', null);
     expect(testHost.deletedCourseId).toEqual(999);
