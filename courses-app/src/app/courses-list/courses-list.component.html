@@ -1,12 +1,13 @@
-<app-courses-controls></app-courses-controls>
+<app-courses-controls (filterTerm)="filterCourses($event)"></app-courses-controls>
 
 <section class="courses">
     <ul class="courses--list">
         <app-courses-list-item 
-        *ngFor="let courseData of coursesData" 
+        *ngFor="let courseData of (coursesData | coursesSort)" 
         [courseData]="courseData"
         (logId)="logCourseId($event)"
         ></app-courses-list-item>
+        <li *ngIf="!coursesData.length">No data. Feel free to add new course!</li>
     </ul>
 </section>
 
