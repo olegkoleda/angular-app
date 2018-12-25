@@ -34,7 +34,7 @@ export class CoursesListComponent implements OnInit {
     console.log(!event);
     this.coursesData = (!event)
                                 ? this.initialData
-                                : this.coursesFilterPipe.transform(this.coursesData, event);
+                                : this.coursesFilterPipe.transform(this.initialData, event);
     console.log(this.coursesData);
   }
 
