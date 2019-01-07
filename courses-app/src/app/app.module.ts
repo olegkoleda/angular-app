@@ -11,6 +11,10 @@ import { CoursesListItemComponent } from './courses-list/courses-list-item/cours
 import { CoursesControlsComponent } from './courses-list/courses-controls/courses-controls.component';
 import { BreadcrumbsComponent } from './header/breadcrumbs/breadcrumbs.component';
 import { LoadMoreComponent } from './courses-list/load-more/load-more.component';
+import { CourseFreshnessDirective } from './directives/course-freshness.directive';
+import { CourseDurationPipe } from './pipes/course-duration.pipe';
+import { CoursesSortPipe } from './pipes/courses-sort.pipe';
+import { CoursesFilterPipe } from './pipes/courses-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { LoadMoreComponent } from './courses-list/load-more/load-more.component'
     CoursesListItemComponent,
     CoursesControlsComponent,
     BreadcrumbsComponent,
-    LoadMoreComponent
+    LoadMoreComponent,
+    CourseFreshnessDirective,
+    CourseDurationPipe,
+    CoursesSortPipe,
+    CoursesFilterPipe,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses-controls',
@@ -7,13 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesControlsComponent implements OnInit {
 
-  public value: string = '';
+  public value: String = '';
+
+  @Output() filterTerm: EventEmitter<String> = new EventEmitter<String>();
+
   constructor() { }
 
   public logSearchValue() {
     console.log(this.value);
   }
   ngOnInit() {
+  }
+
+  // onChanges() {
+  //   this.setFilterTerm();
+  // }
+
+  setFilterTerm() {
+    this.filterTerm.emit(this.value);
   }
 
 }
