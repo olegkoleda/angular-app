@@ -1,4 +1,4 @@
-<li class="courses--list__item" [appCourseFreshness]="courseData.creationDate">
+<li class="courses--list__item" [appCourseFreshness]="courseData.creationDate" tabindex="0">
   <div class="list-item">
     <span class="list-item--title">{{courseData.title | uppercase}}</span>
     <span *ngIf="courseData.topRated" [ngClass]="objectStyle">
@@ -15,7 +15,7 @@
   </div>
 
   <div class="list-item--controls">
-    <button>Edit</button>
-    <button (click)=deleteCourse()>Delete</button>
+    <button class="edit">Edit</button>
+    <button class="delete" (click)=deleteCourse()>Delete</button>
   </div>
 </li>
