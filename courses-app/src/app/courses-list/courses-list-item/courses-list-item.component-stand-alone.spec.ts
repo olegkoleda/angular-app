@@ -1,9 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListItemComponent } from './courses-list-item.component';
-import { Component } from '@angular/core';
 import { Course } from '../course.module';
 import { By } from '@angular/platform-browser';
+import { CourseFreshnessDirective } from 'src/app/directives/course-freshness.directive';
+import { CourseDurationPipe } from 'src/app/pipes/course-duration.pipe';
 
 describe('CoursesListItemComponent stand-alone-test', () => {
   let sut: CoursesListItemComponent;
@@ -14,14 +15,14 @@ describe('CoursesListItemComponent stand-alone-test', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesListItemComponent]
+      declarations: [CoursesListItemComponent, CourseFreshnessDirective, CourseDurationPipe]
     });
   }));
 
   beforeEach(() => {
-    course = new Course(0, 'Course 0', new Date(), 100, 'Lorem ipsum dolor'),
+    course = new Course(0, 'Course 0', new Date(), 100, 'Lorem ipsum dolor', 5),
 
-      fixture = TestBed.createComponent(CoursesListItemComponent);
+    fixture = TestBed.createComponent(CoursesListItemComponent);
     sut = fixture.componentInstance;
     sut.courseData = course;
     deleteMethodSpy = spyOn(sut, 'deleteCourse');

@@ -8,34 +8,26 @@ import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
   styleUrls: ['./courses-list.component.scss'],
   providers: [CoursesFilterPipe],
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent {
 
   public coursesData: Course[] = [
     // tslint:disable:max-line-length
-    new Course(0, 'Course 0', new Date(2018, 11, 10), 10, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', true ),
-    new Course(1, 'Course 1', new Date(2018, 11, 27), 200, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', false ),
-    new Course(2, 'Course 2', new Date(2018, 12, 1), 300, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', true ),
-    new Course(3, 'Course 3', new Date(2018, 12, 12), 400, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', false ),
-    new Course(4, 'Course 4', new Date(2018, 11, 19), 500, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', true ),
+    new Course(0, 'Course 0', new Date(2019, 0, 11), 10, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 5),
+    new Course(1, 'Course 1', new Date(2019, 0, 12), 200, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 4),
+    new Course(2, 'Course 2', new Date(2018, 12, 15), 300, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 3),
+    new Course(3, 'Course 3', new Date(2018, 12, 20), 400, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 2),
+    new Course(4, 'Course 4', new Date(2018, 11, 19), 500, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 0),
   ];
-
-  public initialData: Course[] = this.coursesData.slice();
+  public initialData: Course[] = [...this.coursesData];
 
   constructor(private coursesFilterPipe: CoursesFilterPipe) { }
-
-  ngOnInit() {
-  }
 
   logCourseId(event) {
     console.log(event);
   }
 
-  filterCourses(event) {
-    console.log(!event);
-    this.coursesData = (!event)
-                                ? this.initialData
-                                : this.coursesFilterPipe.transform(this.initialData, event);
-    console.log(this.coursesData);
+  filterCourses(value) {
+    this.coursesData = this.coursesFilterPipe.transform(this.initialData, value);
   }
 
 }

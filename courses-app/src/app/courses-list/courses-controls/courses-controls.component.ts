@@ -19,10 +19,6 @@ export class CoursesControlsComponent implements OnInit {
   ngOnInit() {
   }
 
-  // onChanges() {
-  //   this.setFilterTerm();
-  // }
-
   setFilterTerm() {
     this.filterTerm.emit(this.value);
   }

@@ -4,6 +4,8 @@ import { CoursesListItemComponent } from './courses-list-item.component';
 import { Component } from '@angular/core';
 import { Course } from '../course.module';
 import { By } from '@angular/platform-browser';
+import { CourseFreshnessDirective } from 'src/app/directives/course-freshness.directive';
+import { CourseDurationPipe } from 'src/app/pipes/course-duration.pipe';
 
 @Component({
   template: `
@@ -14,7 +16,7 @@ import { By } from '@angular/platform-browser';
 })
 
 class TestHostComponent {
-  public courseData: Course = {id: 999, title: 'test', creationDate: new Date(), duration: 100, description: 'test'};
+  public courseData: Course = {id: 999, title: 'test', creationDate: new Date(), duration: 100, description: 'test', rating: 5};
   public deletedCourseId: number;
   public deleteCourse(deletedCourseId: number) { this.deletedCourseId = deletedCourseId; }
 }
@@ -25,7 +27,7 @@ describe('CoursesListItemComponent test-host', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListItemComponent, TestHostComponent ]
+      declarations: [ CoursesListItemComponent, TestHostComponent, CourseFreshnessDirective, CourseDurationPipe ]
     })
     .compileComponents();
   }));

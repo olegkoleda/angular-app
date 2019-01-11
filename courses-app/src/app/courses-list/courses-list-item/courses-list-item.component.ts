@@ -11,13 +11,26 @@ export class CoursesListItemComponent implements OnInit {
   @Input() courseData: Course;
   @Output() logId: EventEmitter<number> = new EventEmitter<number>();
 
-  public objectStyle;
+  public objectStyle = {
+    'top-rated': false,
+    'low-rated': false,
+  };
   constructor() { }
 
   ngOnInit() {
-    this.objectStyle = {
-      'top-rated': this.courseData.topRated,
-    };
+    this.isTopRated(this.courseData.rating);
+  }
+
+  isTopRated (data: number) {
+    if (data === 0) {
+      return;
+    } else if (data >= 3) {
+      this.objectStyle['top-rated'] = true;
+      return;
+    } else {
+      this.objectStyle['low-rated'] = true;
+    }
+
   }
 
   deleteCourse() {

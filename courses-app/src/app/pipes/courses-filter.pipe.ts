@@ -7,12 +7,9 @@ import { Course } from '../courses-list/course.module';
 export class CoursesFilterPipe implements PipeTransform {
 
   transform(value: Course[], term?: string): any {
-    if (!term) { 
-      console.log('!term');
+    if (!term) {
       return value; }
       const arr = value.filter((item) => new RegExp(term, 'gi').test(item.title));
-      console.log(arr);
-      
     return arr;
   }
 }
