@@ -18,12 +18,17 @@ export class CoursesListComponent implements OnInit {
   constructor(private coursesFilterPipe: CoursesFilterPipe, private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.coursesData = this.coursesService.getCourses();
+    this.getCourses();
     this.initialData = [...this.coursesData];
   }
 
-  logCourseId(event) {
-    console.log(event);
+  getCourses() {
+    this.coursesService.getCourses()
+    .subscribe(courses => this.coursesData = courses);
+  }
+  deleteCourse(id): void {
+    this.coursesData.filter((course) => course.id !== id);
+    this.coursesService.deleteCouse(id);
   }
 
   filterCourses(value) {

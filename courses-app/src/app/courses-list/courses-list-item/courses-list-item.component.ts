@@ -9,7 +9,7 @@ import { Course } from '../course.module';
 export class CoursesListItemComponent implements OnInit {
 
   @Input() courseData: Course;
-  @Output() logId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() deleteId: EventEmitter<number> = new EventEmitter<number>();
 
   public objectStyle = {
     'top-rated': false,
@@ -34,7 +34,9 @@ export class CoursesListItemComponent implements OnInit {
   }
 
   deleteCourse() {
-    this.logId.emit(this.courseData.id);
+    if (confirm('Are you shure?')) {
+      this.deleteId.emit(this.courseData.id);
+    }
   }
 
 }
