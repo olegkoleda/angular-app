@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,19 +9,18 @@ import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
   styleUrls: ['./courses-list.component.scss'],
   providers: [CoursesFilterPipe],
 })
-export class CoursesListComponent {
+export class CoursesListComponent implements OnInit {
 
-  public coursesData: Course[] = [
-    // tslint:disable:max-line-length
-    new Course(0, 'Course 0', new Date(2019, 0, 11), 10, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 5),
-    new Course(1, 'Course 1', new Date(2019, 0, 12), 200, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 4),
-    new Course(2, 'Course 2', new Date(2018, 12, 15), 300, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 3),
-    new Course(3, 'Course 3', new Date(2018, 12, 20), 400, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 2),
-    new Course(4, 'Course 4', new Date(2018, 11, 19), 500, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 0),
-  ];
-  public initialData: Course[] = [...this.coursesData];
+  public coursesData: Course[] = [];
 
-  constructor(private coursesFilterPipe: CoursesFilterPipe) { }
+  public initialData: Course[] = [];
+
+  constructor(private coursesFilterPipe: CoursesFilterPipe, private coursesService: CoursesService) { }
+
+  ngOnInit() {
+    this.coursesData = this.coursesService.getCourses();
+    this.initialData = [...this.coursesData];
+  }
 
   logCourseId(event) {
     console.log(event);

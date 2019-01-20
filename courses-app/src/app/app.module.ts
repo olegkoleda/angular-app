@@ -15,6 +15,7 @@ import { CourseFreshnessDirective } from './directives/course-freshness.directiv
 import { CourseDurationPipe } from './pipes/course-duration.pipe';
 import { CoursesSortPipe } from './pipes/courses-sort.pipe';
 import { CoursesFilterPipe } from './pipes/courses-filter.pipe';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CoursesFilterPipe } from './pipes/courses-filter.pipe';
     CourseDurationPipe,
     CoursesSortPipe,
     CoursesFilterPipe,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
