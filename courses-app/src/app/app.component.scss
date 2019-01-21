@@ -1,0 +1,17 @@
+@import '../variables';
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+  background: $white-color;
+}
+
+main {
+  flex: 1;
+  overflow: auto;
+  background: $primary-button-color;
+}

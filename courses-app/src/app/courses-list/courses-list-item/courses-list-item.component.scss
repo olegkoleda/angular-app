@@ -1,0 +1,36 @@
+@import '../../../variables';
+
+.courses--list__item {
+  background: $white-color;
+  padding: 1.5rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &--title {
+    color: $blue-text-color;
+    font-size: 2rem;
+  }
+
+  &--controls {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .top-rated {
+    fill: $orange-color;
+  }
+
+  .low-rated {
+    fill: #9a9c28;
+  }
+}
+.fresh {
+  border: 0.3rem solid $fresh-course;
+}
+
+.upcoming {
+  border: 0.3rem solid #3b7495; //$upcoming-course;
+}

@@ -1,0 +1,21 @@
+<li class="courses--list__item" [appCourseFreshness]="courseData.creationDate">
+  <div class="list-item">
+    <span class="list-item--title">{{courseData.title | uppercase}}</span>
+    <span *ngIf="courseData.rating != 0" [ngClass]="objectStyle">
+      <svg height="25" width="23" class="star rating" data-rating="1">
+        <polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+      </svg>
+    </span>
+    <span>{{courseData.duration | duration}} </span>
+    <span>{{courseData.creationDate | date:"dd.MM.yy"}}</span>
+  </div>
+
+  <div>
+    <p>{{courseData.description}}</p>
+  </div>
+
+  <div class="list-item--controls">
+    <button>Edit</button>
+    <button (click)=deleteCourse()>Delete</button>
+  </div>
+</li>

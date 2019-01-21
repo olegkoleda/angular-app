@@ -1,0 +1,11 @@
+<section class="courses-controls">
+  <div class="courses-controls--wrapper">
+    <div class="courses-controls--search">
+      <input type="search" [(ngModel)]="value">
+      <button (click)='setFilterTerm(); logSearchValue()'>Search</button>
+    </div>
+    <div class="courses-controls--add">
+      <button>add course</button>
+    </div>
+  </div>
+</section>
