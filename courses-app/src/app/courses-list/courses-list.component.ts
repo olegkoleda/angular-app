@@ -19,16 +19,15 @@ export class CoursesListComponent implements OnInit {
 
   ngOnInit() {
     this.getCourses();
-    this.initialData = [...this.coursesData];
   }
 
   getCourses() {
-    this.coursesService.getCourses()
-    .subscribe(courses => this.coursesData = courses);
+    this.coursesData = this.coursesService.getCourses();
+    this.initialData = [...this.coursesData];
   }
   deleteCourse(id): void {
-    this.coursesData.filter((course) => course.id !== id);
-    this.coursesService.deleteCouse(id);
+    this.coursesService.deleteCourse(id);
+    this.getCourses();
   }
 
   filterCourses(value) {

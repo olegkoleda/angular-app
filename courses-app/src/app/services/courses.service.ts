@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../courses-list/course.module';
-import { Observable, of } from 'rxjs';
+import { Key } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  private idCounter: number = 5;
+  private idCounter = 5;
   private courses: Course[] = [
     // tslint:disable:max-line-length
     new Course(0, 'Course 0', new Date(2019, 0, 11), 10, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 5),
@@ -18,8 +18,8 @@ export class CoursesService {
 
   constructor() { }
 
-  public getCourses(): Observable<Course[]> {
-    return of (this.courses);
+  public getCourses(): Course[] {
+    return this.courses;
   }
   public createCourse(title: string, creationDate: Date, duration: number, description: string, rating: number ) {
     this.courses = [...this.courses,
@@ -29,11 +29,15 @@ export class CoursesService {
   public getById(couseId: number): Course {
     return this.courses.filter((course) => course.id === couseId)[0];
   }
-  public updateCourse() {
-// inplent!!!!!!!
+  public updateCourse(id, key, value) {
+    const updatedCourse = this.getById(id);
+    updatedCourse[key] = value;
+    this.deleteCourse(id);
+    this.courses = [...this.courses, updatedCourse];
+
   }
-  public deleteCouse(couseId: number) {
-    this.courses.filter((course) => course.id !== couseId);
+  public deleteCourse(couseId: number) {
+    this.courses = this.courses.filter((course) => course.id !== couseId);
   }
 
 }

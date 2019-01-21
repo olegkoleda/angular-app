@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-courses-controls',
   templateUrl: './courses-controls.component.html',
   styleUrls: ['./courses-controls.component.scss']
 })
-export class CoursesControlsComponent implements OnInit {
+export class CoursesControlsComponent {
 
   public value: String = '';
 
@@ -15,8 +15,6 @@ export class CoursesControlsComponent implements OnInit {
 
   public logSearchValue() {
     console.log(this.value);
-  }
-  ngOnInit() {
   }
 
   setFilterTerm() {

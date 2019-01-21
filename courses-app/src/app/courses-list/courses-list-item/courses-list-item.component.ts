@@ -30,7 +30,6 @@ export class CoursesListItemComponent implements OnInit {
     } else {
       this.objectStyle['low-rated'] = true;
     }
-
   }
 
   deleteCourse() {
