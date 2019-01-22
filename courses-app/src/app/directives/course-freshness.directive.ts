@@ -24,7 +24,7 @@ export class CourseFreshnessDirective implements OnInit {
       }
   }
 
-  setCourseStyle (className: string ) {
+  public setCourseStyle (className: string ) {
     this.renderer.addClass(this.el.nativeElement, className);
   }
 }

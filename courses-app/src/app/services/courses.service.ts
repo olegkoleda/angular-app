@@ -30,11 +30,12 @@ export class CoursesService {
     return this.courses.filter((course) => course.id === couseId)[0];
   }
   public updateCourse(id, key, value) {
-    const updatedCourse = this.getById(id);
-    updatedCourse[key] = value;
-    this.deleteCourse(id);
-    this.courses = [...this.courses, updatedCourse];
-
+    this.courses = this.courses.map((course) => {
+      if (course.id === id) {
+        return course[key] = value;
+      }
+      return course;
+    });
   }
   public deleteCourse(couseId: number) {
     this.courses = this.courses.filter((course) => course.id !== couseId);

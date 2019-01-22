@@ -17,7 +17,7 @@ export class CoursesControlsComponent {
     console.log(this.value);
   }
 
-  setFilterTerm() {
+  public setFilterTerm() {
     this.filterTerm.emit(this.value);
   }
 

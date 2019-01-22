@@ -21,16 +21,17 @@ export class CoursesListComponent implements OnInit {
     this.getCourses();
   }
 
-  getCourses() {
+  public getCourses() {
     this.coursesData = this.coursesService.getCourses();
     this.initialData = [...this.coursesData];
   }
-  deleteCourse(id): void {
+  public deleteCourse(id): void {
     this.coursesService.deleteCourse(id);
-    this.getCourses();
+    this.coursesData = this.coursesData.filter((course) => course.id !== id);
+    this.initialData = [...this.coursesData];
   }
 
-  filterCourses(value) {
+  public filterCourses(value) {
     this.coursesData = this.coursesFilterPipe.transform(this.initialData, value);
   }
 

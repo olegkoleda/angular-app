@@ -21,7 +21,7 @@ export class CoursesListItemComponent implements OnInit {
     this.isTopRated(this.courseData.rating);
   }
 
-  isTopRated (data: number) {
+  public isTopRated (data: number) {
     if (data === 0) {
       return;
     } else if (data >= 3) {
@@ -32,8 +32,9 @@ export class CoursesListItemComponent implements OnInit {
     }
   }
 
-  deleteCourse() {
-    if (confirm('Are you shure?')) {
+  public deleteCourse() {
+    const confirmResult = confirm('Do you really want to delete this course?');
+    if (confirmResult) {
       this.deleteId.emit(this.courseData.id);
     }
   }
