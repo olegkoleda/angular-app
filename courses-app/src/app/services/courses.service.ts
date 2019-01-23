@@ -32,7 +32,8 @@ export class CoursesService {
   public updateCourse(id, key, value) {
     this.courses = this.courses.map((course) => {
       if (course.id === id) {
-        return course[key] = value;
+        course[key] = value;
+        return course;
       }
       return course;
     });
