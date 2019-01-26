@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-load-more',
   templateUrl: './load-more.component.html',
   styleUrls: ['./load-more.component.scss']
 })
-export class LoadMoreComponent implements OnInit {
+export class LoadMoreComponent {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  logLoadMore() {
+  public logLoadMore() {
     console.log('Load More!!!');
   }
 }

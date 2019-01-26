@@ -4,7 +4,7 @@
   </div>
   <div class="header--login">
     <span>User login</span>
-    <button>Log off</button>
+    <button (click)=logout()>Log off</button>
   </div>  
 </div>
-<app-breadcrumbs></app-breadcrumbs>
+<app-breadcrumbs *ngIf="isAuth()"></app-breadcrumbs>
