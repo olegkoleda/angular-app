@@ -9,9 +9,10 @@ import { Course } from '../courses-list/course.module';
   styleUrls: ['./add-page.component.scss']
 })
 export class AddPageComponent implements OnInit {
+  public new = false;
   public title: string;
   public description: string;
-  public date: string;
+  public creationDate: Date;
   public duration: number;
   public courseId: number;
   public courseData: Course;
@@ -21,21 +22,24 @@ export class AddPageComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.route.params.subscribe((data) => {
-      this.courseId = data['id'];
-      if (this.courseId) {
-        this.courseData = this.coursesService.getById(this.courseId);
-        console.log(this.courseData);
-        // // tslint:disable-next-line:no-unused-expression
-        // { this.title, this.description, this.date, this.duration} = this.courseData;
-        // this.title = this.courseData.title;
-      }
-    });
+    this.courseId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
+    if (this.courseId) {
+      this.new = true;
+      this.courseData = this.coursesService.getById(this.courseId);
+      this.title = this.courseData.title;
+      this.description = this.courseData.description;
+      this.duration = this.courseData.duration;
+      this.creationDate = this.courseData.creationDate;
+    }
 
   }
 
   public save() {
+    if (this.new) {
+      this.coursesService.createCourse(this.title, this.creationDate, this.duration, this.description, 3);
+    }
+    this.coursesService.updateCourse(this.courseId, 'title', this.title);
     console.log('Saved');
     this.router.navigate(['courses']);
   }

@@ -10,7 +10,7 @@
       <label for="description">Details</label>
       <textarea id="description" name="description" cols="30" rows="10" placeholder="Course description:" [(ngModel)]="description"></textarea>
       <label for="date">Start date</label>
-      <input type="text" name="date" id="date" [(ngModel)]="date">
+      <input type="text" name="creationDate" id="creationDate" [(ngModel)]="creationDate">
       <label for="duration">Duration</label>
       <input type="number" name="duration" id="duration" [(ngModel)]="duration">
       <pre *ngIf="duration">{{duration | duration}}</pre>
