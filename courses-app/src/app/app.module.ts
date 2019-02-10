@@ -17,6 +17,7 @@ import { CoursesSortPipe } from './pipes/courses-sort.pipe';
 import { CoursesFilterPipe } from './pipes/courses-filter.pipe';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AddPageComponent } from './add-page/add-page.component';
+import { NotExistingPageComponent } from './not-existing-page/not-existing-page.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AddPageComponent } from './add-page/add-page.component';
     CoursesFilterPipe,
     LoginPageComponent,
     AddPageComponent,
+    NotExistingPageComponent,
   ],
   imports: [
     BrowserModule,

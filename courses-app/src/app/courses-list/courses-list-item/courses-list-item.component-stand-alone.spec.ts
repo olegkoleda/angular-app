@@ -5,8 +5,10 @@ import { Course } from '../course.module';
 import { By } from '@angular/platform-browser';
 import { CourseFreshnessDirective } from 'src/app/directives/course-freshness.directive';
 import { CourseDurationPipe } from 'src/app/pipes/course-duration.pipe';
+import { Router } from '@angular/router';
 
 describe('CoursesListItemComponent stand-alone-test', () => {
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let sut: CoursesListItemComponent;
   let fixture: ComponentFixture<CoursesListItemComponent>;
 
@@ -15,7 +17,10 @@ describe('CoursesListItemComponent stand-alone-test', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesListItemComponent, CourseFreshnessDirective, CourseDurationPipe]
+      declarations: [CoursesListItemComponent, CourseFreshnessDirective, CourseDurationPipe],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+      ],
     });
   }));
 

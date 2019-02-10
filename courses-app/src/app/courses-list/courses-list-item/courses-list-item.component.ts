@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from '../course.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-list-item',
@@ -16,7 +17,7 @@ export class CoursesListItemComponent implements OnInit {
     'top-rated': false,
     'low-rated': false,
   };
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.isTopRated(this.courseData.rating);
@@ -38,6 +39,10 @@ export class CoursesListItemComponent implements OnInit {
     if (confirmResult) {
       this.deleteId.emit(this.courseData.id);
     }
+  }
+
+  public goToEditPage() {
+    this.router.navigate(['courses', this.courseData.id]);
   }
 
 }

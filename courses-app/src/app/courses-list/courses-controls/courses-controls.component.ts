@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses-controls',
@@ -11,7 +12,7 @@ export class CoursesControlsComponent {
 
   @Output() filterTerm: EventEmitter<String> = new EventEmitter<String>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public logSearchValue() {
     console.log(this.value);
@@ -19,6 +20,10 @@ export class CoursesControlsComponent {
 
   public setFilterTerm() {
     this.filterTerm.emit(this.value);
+  }
+
+  public goToCreatePage() {
+    this.router.navigate(['courses', 'new']);
   }
 
 }

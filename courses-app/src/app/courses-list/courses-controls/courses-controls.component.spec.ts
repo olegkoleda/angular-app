@@ -4,8 +4,10 @@ import { CoursesControlsComponent } from './courses-controls.component';
 import { FormsModule } from '@angular/forms';
 import { newEvent } from 'src/testing';
 import { By } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 describe('CoursesControlsComponent', () => {
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let component: CoursesControlsComponent;
   let fixture: ComponentFixture<CoursesControlsComponent>;
 
@@ -15,6 +17,9 @@ describe('CoursesControlsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CoursesControlsComponent ],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+      ],
       imports: [ FormsModule ],
     })
     .compileComponents();
