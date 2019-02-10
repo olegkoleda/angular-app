@@ -9,20 +9,20 @@ import { Course } from '../courses-list/course.module';
   styleUrls: ['./add-page.component.scss']
 })
 export class AddPageComponent implements OnInit {
-  public new = false;
-  public title: string;
-  public description: string;
-  public creationDate: Date;
-  public duration: number;
-  public courseId: number;
-  public courseData: Course;
+  private new = false;
+  private title: string;
+  private description: string;
+  private creationDate: Date;
+  private duration: number;
+  private courseId: number;
+  private courseData: Course;
 
 
   constructor(private route: ActivatedRoute, private coursesService: CoursesService,
               private router: Router) { }
 
   ngOnInit() {
-    this.courseId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    this.courseId = parseInt(this.route.snapshot.params.id, 10);
 
     if (this.courseId) {
       this.new = true;

@@ -6,6 +6,7 @@ import { Course } from '../course.module';
 import { By } from '@angular/platform-browser';
 import { CourseFreshnessDirective } from 'src/app/directives/course-freshness.directive';
 import { CourseDurationPipe } from 'src/app/pipes/course-duration.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   template: `
@@ -22,12 +23,16 @@ class TestHostComponent {
 }
 
 describe('CoursesListItemComponent test-host', () => {
+  const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
   let testHost: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesListItemComponent, TestHostComponent, CourseFreshnessDirective, CourseDurationPipe ]
+      declarations: [ CoursesListItemComponent, TestHostComponent, CourseFreshnessDirective, CourseDurationPipe ],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+      ],
     })
     .compileComponents();
   }));

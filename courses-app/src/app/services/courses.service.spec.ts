@@ -1,12 +1,20 @@
-import { TestBed } from '@angular/core/testing';
-
 import { CoursesService } from './courses.service';
 
 describe('CoursesService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let service: CoursesService;
 
-  it('should be created', () => {
-    const service: CoursesService = TestBed.get(CoursesService);
-    expect(service).toBeTruthy();
+  beforeEach(() => { service = new CoursesService(); });
+
+  it('CoursesService should return and delete courses work', () => {
+    const length = service.getCourses().length;
+    expect(service.getCourses().length).toEqual(length);
+    service.deleteCourse(0);
+    expect(service.getCourses().length).toEqual(length - 1);
+  });
+
+  it('CoursesService should create courses work', () => {
+    const length = service.getCourses().length;
+    service.createCourse('test', new Date(), 123, 'test', 1);
+    expect(service.getCourses().length).toEqual(length + 1);
   });
 });
