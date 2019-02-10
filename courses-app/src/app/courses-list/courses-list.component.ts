@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
 import { CoursesService } from '../services/courses.service';
@@ -8,6 +8,7 @@ import { CoursesService } from '../services/courses.service';
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
   providers: [CoursesFilterPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoursesListComponent implements OnInit {
 

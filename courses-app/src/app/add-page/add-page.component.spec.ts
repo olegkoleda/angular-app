@@ -1,22 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginPageComponent } from './login-page.component';
+import { AddPageComponent } from './add-page.component';
 import { FormsModule } from '@angular/forms';
+import { CourseDurationPipe } from '../pipes/course-duration.pipe';
 
-describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+describe('AddPageComponent', () => {
+  let component: AddPageComponent;
+  let fixture: ComponentFixture<AddPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ],
+      declarations: [ AddPageComponent, CourseDurationPipe ],
       imports: [ FormsModule ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginPageComponent);
+    fixture = TestBed.createComponent(AddPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

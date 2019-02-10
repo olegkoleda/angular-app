@@ -19,9 +19,6 @@ describe('CoursesListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CoursesListComponent);
     component = fixture.componentInstance;
-    component.coursesData = [
-      {id: 0, title: 'test', creationDate: new Date(), duration: 100, description: 'test', rating: 5},
-      {id: 0, title: 'test', creationDate: new Date(), duration: 100, description: 'test', rating: 5}];
     fixture.detectChanges();
   });
 
@@ -31,6 +28,6 @@ describe('CoursesListComponent', () => {
 
   it('should create 2 items', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('ul').childElementCount).toEqual(2);
+    expect(compiled.querySelector('ul').childElementCount).toEqual(component.coursesData.length);
   });
 });

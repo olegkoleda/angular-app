@@ -1,0 +1,30 @@
+@import '../../variables';
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: $primary-font-family;
+    font-size: 1.6rem;  
+
+    &__fields {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 5rem;
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: center;
+    }
+
+    input, textarea {
+        width: 100%;
+        margin: 0.5rem 1rem 0.5rem 0;
+        padding: 1rem 0.5rem;
+    }
+}
+
