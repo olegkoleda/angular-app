@@ -3,7 +3,7 @@
 <section class="courses">
     <ul class="courses--list">
         <app-courses-list-item 
-        *ngFor="let courseData of (coursesData | coursesSort)" 
+        *ngFor="let courseData of (coursesData )" 
         [courseData]="courseData"
         (deleteId)="deleteCourse($event)"
         ></app-courses-list-item>

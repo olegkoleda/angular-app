@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class CoursesListItemComponent implements OnInit {
 
   @Input() courseData: Course;
+  @Input() course: Course;
   @Output() deleteId: EventEmitter<number> = new EventEmitter<number>();
 
   public objectStyle = {
@@ -20,6 +21,8 @@ export class CoursesListItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    console.log(this.course);
+
     this.isTopRated(this.courseData.rating);
   }
 

@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../courses-list/course.module';
 import { Key } from 'protractor';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
+  private BASE_URL = 'http://localhost:3004';
   private idCounter = 5;
   private courses: Course[] = [
     // tslint:disable:max-line-length
@@ -16,10 +19,10 @@ export class CoursesService {
     new Course(4, 'Course 4', new Date(2018, 11, 19), 500, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, possimus? Lorem', 0),
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  public getCourses(): Course[] {
-    return this.courses;
+  public getCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.BASE_URL}/courses`);
   }
   public createCourse(title: string, creationDate: Date, duration: number, description: string, rating: number ) {
     this.courses = [...this.courses,

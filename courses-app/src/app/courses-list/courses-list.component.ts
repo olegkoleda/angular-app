@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
 import { CoursesService } from '../services/courses.service';
+import { Observable } from 'rxjs';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses-list',
@@ -13,6 +15,7 @@ import { CoursesService } from '../services/courses.service';
 export class CoursesListComponent implements OnInit {
 
   public coursesData: Course[] = [];
+  public course: Course[];
 
   public initialData: Course[] = [];
 
@@ -23,14 +26,18 @@ export class CoursesListComponent implements OnInit {
   }
 
   public getCourses() {
-    this.coursesData = this.coursesService.getCourses();
-    this.initialData = [...this.coursesData];
+    // this.coursesData = this.coursesService.getCourses().pipe(share());
+    this.coursesService.getCourses().subscribe((res: Course[]) => {
+      console.log(res);
+      this.coursesData = res;
+      this.initialData = [...this.coursesData];
+    });
   }
-  public deleteCourse(id): void {
-    this.coursesService.deleteCourse(id);
-    this.coursesData = this.coursesData.filter((course) => course.id !== id);
-    this.initialData = [...this.coursesData];
-  }
+  // public deleteCourse(id): void {
+  //   this.coursesService.deleteCourse(id);
+  //   this.coursesData = this.coursesData.filter((course) => course.id !== id);
+  //   this.initialData = [...this.coursesData];
+  // }
 
   public filterCourses(value) {
     this.coursesData = this.coursesFilterPipe.transform(this.initialData, value);
