@@ -9,7 +9,7 @@ export class CoursesFilterPipe implements PipeTransform {
   transform(value: Course[], term?: string): any {
     if (!term) {
       return value; }
-      const arr = value.filter((item) => new RegExp(term, 'gi').test(item.title));
+      const arr = value.filter((item) => new RegExp(term, 'gi').test(item.name));
     return arr;
   }
 }

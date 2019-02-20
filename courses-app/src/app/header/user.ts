@@ -1,9 +1,9 @@
 import { IUser } from '../interfaces/user';
 
 export class User implements IUser {
-    public token: string;
-    public email: string;
-    public password: string;
+    public readonly token: string;
+    public readonly email: string;
+    public readonly password: string;
 
     constructor(token: string, email: string, password: string) {
         this.token = token;

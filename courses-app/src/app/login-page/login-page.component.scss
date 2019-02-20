@@ -1,12 +1,9 @@
-.wrapper {
+.login {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.login {
-    width: 40rem;
+    flex-direction: column;
 
     &__header {
         font-size: 2rem;

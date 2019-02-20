@@ -6,14 +6,14 @@
         <p>Make sure you have filled in all the necessary fields and have uploaded all the required files</p>
       </legend>
       <label for="title">Course title</label>
-      <input type="text" id="title" name="title" placeholder="Full course title" [(ngModel)]="title">
+      <input type="text" id="title" name="title" placeholder="Full course title" [(ngModel)]="name">
       <label for="description">Details</label>
       <textarea id="description" name="description" cols="30" rows="10" placeholder="Course description:" [(ngModel)]="description"></textarea>
       <label for="date">Start date</label>
-      <input type="text" name="creationDate" id="creationDate" [(ngModel)]="creationDate">
+      <input type="text" name="creationDate" id="creationDate" [(ngModel)]="date">
       <label for="duration">Duration</label>
-      <input type="number" name="duration" id="duration" [(ngModel)]="duration">
-      <pre *ngIf="duration">{{duration | duration}}</pre>
+      <input type="number" name="length" id="length" [(ngModel)]="length">
+      <pre *ngIf="length">{{length | duration}}</pre>
     </fieldset>
   </form>
 

@@ -16,25 +16,15 @@ export class CoursesListItemComponent implements OnInit {
 
   public objectStyle = {
     'top-rated': false,
-    'low-rated': false,
   };
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.course);
-
-    this.isTopRated(this.courseData.rating);
+    this.isTopRated(this.courseData.isTopRated);
   }
 
-  public isTopRated (data: number) {
-    if (data === 0) {
-      return;
-    } else if (data >= 3) {
-      this.objectStyle['top-rated'] = true;
-      return;
-    } else {
-      this.objectStyle['low-rated'] = true;
-    }
+  public isTopRated (data: boolean) {
+   this.objectStyle['top-rated'] = data;
   }
 
   public deleteCourse() {

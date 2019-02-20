@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-load-more',
@@ -6,10 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./load-more.component.scss']
 })
 export class LoadMoreComponent {
+  private pageCounter = 1;
 
+  @Output() pageNumber: EventEmitter<number> = new EventEmitter<number>();
   constructor() { }
 
   public logLoadMore() {
-    console.log('Load More!!!');
+    this.pageNumber.emit(this.pageCounter++);
   }
 }

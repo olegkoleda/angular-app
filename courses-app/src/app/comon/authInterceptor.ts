@@ -8,15 +8,17 @@ import {
 
 import { Observable } from 'rxjs';
 
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private key = 'angular-app-user';
+  private token = (localStorage.getItem(this.key)) ? JSON.stringify(JSON.parse(localStorage.getItem(this.key)).token) : '';
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
     const authReq = req.clone({
-      headers: req.headers.set('Authorization', JSON.parse(localStorage.getItem(this.key)).token)
+      headers: req.headers.set('Authorization', this.token)
     });
     return next.handle(authReq);
   }
