@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +18,8 @@ export class AuthService {
 
 
   public login(login: string, password: string) {
-    const option = JSON.stringify({ login: login, password: password });
-    return this.http.post<any>(`${this.BASE_URL}/auth/login`, option)
+    const option = JSON.stringify({ login: login, password: password });    
+    return this.http.post<any>(`${this.BASE_URL}/auth/login`, option, httpOptions)
         .pipe(map(resp => {
             if (resp) {
                 localStorage.setItem(this.key, JSON.stringify(resp));

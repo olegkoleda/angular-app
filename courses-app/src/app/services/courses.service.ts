@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Course } from '../courses-list/course.module';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +30,7 @@ export class CoursesService {
   public createCourse(courseData: Object) {
     const options = JSON.stringify(courseData);
     console.log(options);
-    return this.http.post<any>(this.BASE_URL, options).pipe(map(resp => resp));
+    return this.http.post<any>(this.BASE_URL, options, httpOptions).pipe(map(resp => resp));
   }
 
   public deleteCourse(id): Observable<Course[]> {
