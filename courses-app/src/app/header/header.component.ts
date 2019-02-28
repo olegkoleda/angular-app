@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,18 +7,26 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit, OnDestroy {
+  public user = {};
+  private usernameSubscription;
   constructor(private authService: AuthService, private router: Router) { }
+
+  public ngOnInit() {
+    this.usernameSubscription = this.authService.getUserInfo().subscribe(res => this.user = res);
+  }
 
   public logout() {
     this.authService.logout();
-    console.log('LOG OUT');
     this.router.navigate(['login']);
 
   }
 
   public isAuth(): boolean {
     return this.authService.isAuthenticated();
+  }
+
+  public ngOnDestroy() {
+    this.usernameSubscription.unsubscribe();
   }
 }

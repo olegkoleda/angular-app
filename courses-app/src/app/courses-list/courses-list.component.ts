@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
 import { CoursesService } from '../services/courses.service';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -20,7 +21,8 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   private deleteCoursesSubscription;
 
   constructor(
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private spinnerService: SpinnerService
   ) {}
 
   public ngOnInit() {
@@ -28,16 +30,20 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   public getCourses(page): void {
+    this.spinnerService.show();
     this.getCoursesSubscription = this.coursesService
       .getCourses(page)
       .subscribe((res: Course[]) => {
         this.coursesData = [...this.coursesData, ...res];
+        this.spinnerService.hide();
       });
   }
 
   public deleteCourse(courseId): void {
+    this.spinnerService.show();
     this.deleteCoursesSubscription = this.coursesService.deleteCourse(courseId).subscribe(res => {
       this.coursesData = this.coursesData.filter( course => course.id !== courseId);
+      this.spinnerService.hide();
     });
   }
 
@@ -47,9 +53,11 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   public filterCourses(term: string): void {
+    this.spinnerService.show();
     this.filterCoursesSubscription = this.coursesService
       .searchCourse(term)
       .subscribe((res: Course[]) => {
+        this.spinnerService.hide();
         return this.coursesData = res;
       });
   }

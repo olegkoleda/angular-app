@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,10 +14,12 @@ export class LoginPageComponent implements OnDestroy {
   private password = '';
   private loginSubscription;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private spinnerService: SpinnerService) { }
 
   public login(): void {
+    this.spinnerService.show();
     this.loginSubscription = this.authService.login(this.email, this.password).subscribe((res) => {
+      this.spinnerService.hide();
       this.router.navigate(['courses']);
       },
       (error: HttpErrorResponse) => console.log(error)

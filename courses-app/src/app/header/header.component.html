@@ -1,9 +1,9 @@
-<div class="header--wrapper">
-  <div class="header--logo">
+<div class="header__wrapper">
+  <div class="header__logo">
     <h1>ANGULAR <span>GMP</span></h1>
   </div>
-  <div class="header--login">
-    <span>User login</span>
+  <div class="header__login">
+    <span>{{user?.name?.first}} {{user?.name?.last}}</span>
     <button (click)=logout()>Log off</button>
   </div>  
 </div>

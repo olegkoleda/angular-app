@@ -20,6 +20,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AddPageComponent } from './add-page/add-page.component';
 import { NotExistingPageComponent } from './not-existing-page/not-existing-page.component';
 import { AuthInterceptor } from './comon/authInterceptor';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AuthInterceptor } from './comon/authInterceptor';
     LoginPageComponent,
     AddPageComponent,
     NotExistingPageComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

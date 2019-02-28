@@ -1,12 +1,20 @@
 @import '../../variables';
 
-.header--wrapper {
+.header__wrapper {
   display: flex;
   justify-content: space-between;
   padding: 1rem 3rem;
 }
 
-.header--logo {
+.header__login {
+  span {
+    font-family: $primary-bold-font-family;
+    font-size: 2rem;
+    padding: 1rem;    
+  }
+}
+
+.header__logo {
   font-size: 1.8rem;
   color: $logo-text-color;
   

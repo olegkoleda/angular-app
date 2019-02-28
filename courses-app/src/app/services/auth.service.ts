@@ -38,6 +38,6 @@ export class AuthService {
   }
 
   public getUserInfo() {
-    return this.http.get<any>('/auth/userinfo');
+    return this.http.post<any>(`${this.BASE_URL}/auth/userinfo`,JSON.stringify({}), httpOptions);
   }
 }
