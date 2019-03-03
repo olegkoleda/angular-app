@@ -17,8 +17,8 @@ export class AuthService {
   private BASE_URL = 'http://localhost:3004';
 
 
-  public login(login: string, password: string) {
-    const option = JSON.stringify({ login: login, password: password });    
+  public login(userData) {
+    const option = JSON.stringify(userData);    
     return this.http.post<any>(`${this.BASE_URL}/auth/login`, option, httpOptions)
         .pipe(map(resp => {
             if (resp) {
