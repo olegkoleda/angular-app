@@ -17,9 +17,9 @@ export class CoursesControlsComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.searchTerm$.pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged()
     ).subscribe((res) => {
         this.filterTerm.emit(res);

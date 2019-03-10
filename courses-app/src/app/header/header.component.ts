@@ -10,23 +10,21 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, OnDestroy {
   public user = {};
   private usernameSubscription;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.usernameSubscription = this.authService.getUserInfo().subscribe(res => this.user = res);
   }
 
   public logout() {
     this.authService.logout();
-    this.router.navigate(['login']);
-
   }
 
   public isAuth(): boolean {
     return this.authService.isAuthenticated();
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.usernameSubscription.unsubscribe();
   }
 }

@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnDestroy {
       (error: HttpErrorResponse) => console.log(error)
       );
   }
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.loginSubscription.unsubscribe();
   }
 }
