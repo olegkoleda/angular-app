@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -11,7 +12,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private key = 'angular-app-user';
   private BASE_URL = 'http://localhost:3004';
@@ -30,6 +31,7 @@ export class AuthService {
 
 
   public logout(): void {
+    this.router.navigate(['login']);
     localStorage.removeItem(this.key);
   }
 
@@ -38,6 +40,6 @@ export class AuthService {
   }
 
   public getUserInfo() {
-    return this.http.post<any>(`${this.BASE_URL}/auth/userinfo`,JSON.stringify({}), httpOptions);
+    return this.http.post<any>(`${this.BASE_URL}/auth/userinfo`, httpOptions);
   }
 }

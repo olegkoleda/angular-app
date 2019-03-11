@@ -25,7 +25,7 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     private spinnerService: SpinnerService
   ) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.getCourses(this.page);
   }
 
@@ -55,14 +55,14 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   public filterCourses(term: string): void {
     this.spinnerService.show();
     this.filterCoursesSubscription = this.coursesService
-      .searchCourse(term)
+      .getCourses(0, term)
       .subscribe((res: Course[]) => {
         this.spinnerService.hide();
         return this.coursesData = res;
       });
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.getCoursesSubscription.unsubscribe();
     if (this.filterCoursesSubscription) { this.filterCoursesSubscription.unsubscribe(); }
     if (this.deleteCoursesSubscription) { this.deleteCoursesSubscription.unsubscribe(); }

@@ -17,9 +17,9 @@ export class CoursesControlsComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.searchTerm$.pipe(
-      debounceTime(300),
+      debounceTime(500),
       distinctUntilChanged()
     ).subscribe((res) => {
         this.filterTerm.emit(res);
@@ -30,7 +30,9 @@ export class CoursesControlsComponent implements OnInit {
   }
 
   public setFilterTerm(value) {
+    if (value.length >= 3 || value == '') {
       this.searchTerm$.next(value);
+    }
   }
 
   public goToCreatePage() {

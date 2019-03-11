@@ -22,6 +22,5 @@ export class LoginPageComponent {
   public login(): void {
     this.spinnerService.show();
     this.store.dispatch(new AuthActions.Login({login: this.email, password: this.password}));
-    
   }
 }

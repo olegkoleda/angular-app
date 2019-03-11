@@ -17,14 +17,11 @@ export class CoursesService {
 
   constructor(private http: HttpClient) {}
 
-  public getCourses(page): Observable<Course[]> {
+  public getCourses(page, textFragment?: string): Observable<Course[]> {
+    const params = { start: `${page * +this.countToLoad}`, count: this.countToLoad };
     return this.http.get<Course[]>(this.BASE_URL, {
-      params: { start: `${page * +this.countToLoad}`, count: this.countToLoad }
+      params: (textFragment) ? {textFragment, ...params} : params
     });
-  }
-
-  public searchCourse(textFragment: string) {
-    return this.http.get<Course[]>(this.BASE_URL, { params: { textFragment, count: this.countToLoad  } });
   }
 
   public createCourse(courseData: Object) {
