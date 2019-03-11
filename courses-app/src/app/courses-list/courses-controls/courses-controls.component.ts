@@ -30,7 +30,9 @@ export class CoursesControlsComponent implements OnInit {
   }
 
   public setFilterTerm(value) {
+    if (value.length >= 3 || value == '') {
       this.searchTerm$.next(value);
+    }
   }
 
   public goToCreatePage() {

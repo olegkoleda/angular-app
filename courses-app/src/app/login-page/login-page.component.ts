@@ -22,7 +22,10 @@ export class LoginPageComponent implements OnDestroy {
       this.spinnerService.hide();
       this.router.navigate(['courses']);
       },
-      (error: HttpErrorResponse) => console.log(error)
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        this.spinnerService.hide();
+      }
       );
   }
   ngOnDestroy(): void {
