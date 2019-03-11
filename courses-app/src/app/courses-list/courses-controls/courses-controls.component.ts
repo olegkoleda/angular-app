@@ -1,29 +1,41 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses-controls',
   templateUrl: './courses-controls.component.html',
   styleUrls: ['./courses-controls.component.scss']
 })
-export class CoursesControlsComponent {
+export class CoursesControlsComponent implements OnInit {
 
   public value: String = '';
+  private searchTerm$ = new Subject<string>();
 
   @Output() filterTerm: EventEmitter<String> = new EventEmitter<String>();
 
   constructor(private router: Router) { }
 
+  ngOnInit() {
+    this.searchTerm$.pipe(
+      debounceTime(500),
+      distinctUntilChanged()
+    ).subscribe((res) => {
+        this.filterTerm.emit(res);
+    });
+  }
   public logSearchValue() {
     console.log(this.value);
   }
 
-  public setFilterTerm() {
-    this.filterTerm.emit(this.value);
+  public setFilterTerm(value) {
+    if (value.length >= 3 || value == '') {
+      this.searchTerm$.next(value);
+    }
   }
 
   public goToCreatePage() {
     this.router.navigate(['courses', 'new']);
   }
-
 }

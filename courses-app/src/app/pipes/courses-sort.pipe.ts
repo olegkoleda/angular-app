@@ -7,7 +7,7 @@ import { Course } from '../courses-list/course.module';
 export class CoursesSortPipe implements PipeTransform {
 
   transform(courses: Course[]): Course[] {
-    return courses.sort((a, b) => a.creationDate.getTime() - b.creationDate.getTime());
+    return courses.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
 }

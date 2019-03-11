@@ -2,18 +2,18 @@ import { ICourse } from '../interfaces/course';
 
 export class Course implements ICourse {
     public id: number;
-    public title: string;
-    public creationDate: Date;
-    public duration: number;
+    public name: string;
+    public date: Date;
+    public length: number;
     public description: string;
-    public rating: number;
+    public isTopRated: boolean;
 
-    constructor(id: number, title: string, creationDate: Date, duration: number, description: string, rating: number ) {
+    constructor(id: number, title: string, creationDate: Date, duration: number, description: string, rating: boolean ) {
         this.id = id;
-        this.title = title;
-        this.creationDate = creationDate;
-        this.duration = duration;
+        this.name = title;
+        this.date = creationDate;
+        this.length = duration;
         this.description = description;
-        this.rating = rating;
+        this.isTopRated = rating;
     }
 }

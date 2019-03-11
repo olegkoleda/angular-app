@@ -11,27 +11,20 @@ import { Router } from '@angular/router';
 export class CoursesListItemComponent implements OnInit {
 
   @Input() courseData: Course;
+  @Input() course: Course;
   @Output() deleteId: EventEmitter<number> = new EventEmitter<number>();
 
   public objectStyle = {
     'top-rated': false,
-    'low-rated': false,
   };
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.isTopRated(this.courseData.rating);
+    this.isTopRated(this.courseData.isTopRated);
   }
 
-  public isTopRated (data: number) {
-    if (data === 0) {
-      return;
-    } else if (data >= 3) {
-      this.objectStyle['top-rated'] = true;
-      return;
-    } else {
-      this.objectStyle['low-rated'] = true;
-    }
+  public isTopRated (data: boolean) {
+   this.objectStyle['top-rated'] = data;
   }
 
   public deleteCourse() {

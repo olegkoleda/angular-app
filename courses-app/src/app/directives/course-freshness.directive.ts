@@ -15,7 +15,7 @@ export class CourseFreshnessDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.creationTime = this.creationDate.getTime();
+   this.creationTime = new Date(this.creationDate).getTime();
 
     if (this.creationTime < this.currentDate && this.creationTime >= this.currentDate - this.DAYS_14) {
       this.setCourseStyle('fresh');

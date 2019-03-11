@@ -1,12 +1,10 @@
-<div class="wrapper">
-  <div class="login">
-    <div class="login__header">
-      <span>LOGIN</span>
-    </div>
-      <form class="login__form">
-        <input [(ngModel)]="email" type="text" placeholder="email" name="email"/>
-        <input [(ngModel)]="password" type="password" placeholder="password" name="password"/>
-        <button (click)=login()>login</button>
-      </form>
+<div class="login">
+  <div class="login__header">
+    <span>LOGIN</span>
   </div>
+  <form class="login__form">
+    <input [(ngModel)]="email" type="text" placeholder="email" name="email" />
+    <input [(ngModel)]="password" type="password" placeholder="password" name="password" />
+    <button (click)=login()>login</button>
+  </form>
 </div>
