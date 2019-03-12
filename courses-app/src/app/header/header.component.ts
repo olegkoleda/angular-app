@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../actions/auth.actions';
+import * as appState from '../reducers';
 
 @Component({
   selector: 'app-header',
@@ -10,14 +12,14 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, OnDestroy {
   public user = {};
   private usernameSubscription;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private store: Store<appState.State>) { }
 
   ngOnInit() {
     this.usernameSubscription = this.authService.getUserInfo().subscribe(res => this.user = res);
   }
 
   public logout() {
-    this.authService.logout();
+    this.store.dispatch(new AuthActions.Logout());
   }
 
   public isAuth(): boolean {

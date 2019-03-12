@@ -18,7 +18,7 @@ export class AppEffects {
               private authService: AuthService,
               private router: Router,
               private spinnerService: SpinnerService) {}
-  
+
   @Effect()
   login$ = this.actions$.pipe(
     ofType<Login>(AuthActionTypes.Login),
@@ -31,11 +31,28 @@ export class AppEffects {
     )
   );
 
+  @Effect()
+  logout$ = this.actions$.pipe(
+    ofType<Login>(AuthActionTypes.Logout),
+    map(action => action.payload),
+    map(() =>
+      this.authService.logout()
+    )
+  );
+
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
     ofType(AuthActionTypes.LoginSuccess),
     tap(() => {
       this.router.navigate(['courses']);
+      this.spinnerService.hide();
+    })
+  );
+
+  @Effect({ dispatch: false })
+  loginFailure$ = this.actions$.pipe(
+    ofType(AuthActionTypes.LoginFailure),
+    tap(() => {
       this.spinnerService.hide();
     })
   );
