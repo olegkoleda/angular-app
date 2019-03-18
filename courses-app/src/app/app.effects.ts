@@ -6,16 +6,25 @@ import {
   LoginFailure,
   LoginSuccess,
 } from './actions/auth.actions';
+
+import {
+  CoursesActionTypes,
+  Get,
+  Add,
+  Remove
+} from './actions/courses.actions'
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { of, from } from 'rxjs';
 import { SpinnerService } from './services/spinner.service';
+import { CoursesService } from './services/courses.service';
 
 @Injectable()
 export class AppEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
+              private coursesService: CoursesService,
               private router: Router,
               private spinnerService: SpinnerService) {}
 
@@ -55,5 +64,19 @@ export class AppEffects {
     tap(() => {
       this.spinnerService.hide();
     })
+  );
+
+  // Courses effects
+
+  @Effect()
+  get$ = this.actions$.pipe(
+    ofType<Login>(CoursesActionTypes.Get),
+    map(action => action.payload),
+    exhaustMap((page) =>
+      this.coursesService.getCourses(page).pipe(
+        map(courses => new LoginSuccess({ token })),
+        catchError(error => of(new LoginFailure(error)))
+      )
+    )
   );
 }
