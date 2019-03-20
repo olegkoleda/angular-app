@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
 import { Course } from '../courses-list/course.module';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-page',
@@ -16,6 +17,13 @@ export class AddPageComponent implements OnInit {
   private length: number;
   private courseId: number;
   private courseData: Course;
+
+  public addForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+    date: new FormControl(''),
+    length: new FormControl(''),
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +44,10 @@ export class AddPageComponent implements OnInit {
         this.date = this.courseData.date;
       });
     }
+  }
+
+  public click() {
+    console.log( this.addForm);
   }
 
   public save() {
