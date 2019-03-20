@@ -2,29 +2,19 @@ import { CoursesActionsUnion, CoursesActionTypes } from './../actions/courses.ac
 import { Course } from '../courses-list/course.module';
 
 
-export interface coursesState {
+export interface CoursesState {
     courses: Course[];
   }
-  
-  export const initialcoursesState: coursesState = {
+
+  export const initialcoursesState: CoursesState = {
     courses: null,
   };
-  
-// export function authReducer(state = initialcoursesState, action: CoursesActionsUnion) {
-//     switch (action.type) {
-//       case CoursesActionTypes.LoginSuccess: {
-//         return {
-//           ...state,
-//           token: action.payload,
-//         };
-//       }
-  
-//       case CoursesActionTypes.Logout: {
-//         return initialcoursesState;
-//       }
-  
-//       default: {
-//         return state;
-//       }
-//     }
-//   }
+
+export function coursesReducer(state = initialcoursesState, action: CoursesActionsUnion) {
+    switch (action.type) {
+
+      default: {
+        return state;
+      }
+    }
+  }

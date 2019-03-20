@@ -10,9 +10,10 @@ import {
 import {
   CoursesActionTypes,
   Get,
+  GetSuccess,
   Add,
   Remove
-} from './actions/courses.actions'
+} from './actions/courses.actions';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
@@ -70,12 +71,11 @@ export class AppEffects {
 
   @Effect()
   get$ = this.actions$.pipe(
-    ofType<Login>(CoursesActionTypes.Get),
+    ofType<Get>(CoursesActionTypes.Get),
     map(action => action.payload),
     exhaustMap((page) =>
       this.coursesService.getCourses(page).pipe(
-        map(courses => new LoginSuccess({ token })),
-        catchError(error => of(new LoginFailure(error)))
+        map(courses => new GetSuccess(courses)),
       )
     )
   );

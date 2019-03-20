@@ -3,6 +3,10 @@ import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
 import { CoursesService } from '../services/courses.service';
 import { SpinnerService } from '../services/spinner.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as appState from '../reducers';
+import * as  CoursesActions from '../actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list',
@@ -19,25 +23,43 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   private getCoursesSubscription;
   private filterCoursesSubscription;
   private deleteCoursesSubscription;
+  private courses$: Observable<Course[]>;
 
   constructor(
     private coursesService: CoursesService,
-    private spinnerService: SpinnerService
-  ) {}
+    private spinnerService: SpinnerService,
+    private store: Store<appState.State>
+  ) {
+    // this.courses$ = store.pipe(select('courses'));
+}
+
 
   ngOnInit() {
-    this.getCourses(this.page);
+    this.store.dispatch(new CoursesActions.Get(this.page));
+
+  //   this.store
+  // .pipe(
+  //   select(appState.selectAllCourses),
+  // )
+  // .subscribe((res: Course[]) => {
+  //   this.coursesData = [...this.coursesData, ...res];
+  //   this.spinnerService.hide();
+  // });
+    this.courses$ = this.store.pipe(select(appState.selectAllCourses));
+    console.log(this.courses$);
+    console.log(this.courses$);
+    // this.getCourses(this.page);
   }
 
-  public getCourses(page): void {
-    this.spinnerService.show();
-    this.getCoursesSubscription = this.coursesService
-      .getCourses(page)
-      .subscribe((res: Course[]) => {
-        this.coursesData = [...this.coursesData, ...res];
-        this.spinnerService.hide();
-      });
-  }
+  // public getCourses(page): void {
+  //   this.spinnerService.show();
+  //   this.getCoursesSubscription = this.coursesService
+  //     .getCourses(page)
+  //     .subscribe((res: Course[]) => {
+  //       this.coursesData = [...this.coursesData, ...res];
+  //       this.spinnerService.hide();
+  //     });
+  // }
 
   public deleteCourse(courseId): void {
     this.spinnerService.show();
