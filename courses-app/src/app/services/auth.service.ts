@@ -19,7 +19,7 @@ export class AuthService {
 
 
   public login(login: string, password: string) {
-    const option = JSON.stringify({ login, password });    
+    const option = JSON.stringify({ login, password });
     return this.http.post<any>(`${this.BASE_URL}/auth/login`, option, httpOptions)
         .pipe(map(resp => {
             if (resp) {
