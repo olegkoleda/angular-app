@@ -6,7 +6,7 @@ export interface AuthState {
   }
   
   export const initialAuthState: AuthState = {
-    token: null,
+    token: '',
   };
   
 export function authReducer(state = initialAuthState, action: AuthActionsUnion) {
@@ -14,7 +14,7 @@ export function authReducer(state = initialAuthState, action: AuthActionsUnion) 
       case AuthActionTypes.LoginSuccess: {
         return {
           ...state,
-          token: action.payload,
+          token: action.payload.token,
         };
       }
   

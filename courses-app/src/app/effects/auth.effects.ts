@@ -5,7 +5,8 @@ import {
   Login,
   LoginFailure,
   LoginSuccess,
-} from './actions/auth.actions';
+  Logout,
+} from '../actions/auth.actions';
 
 import {
   CoursesActionTypes,
@@ -13,16 +14,16 @@ import {
   GetSuccess,
   Add,
   Remove
-} from './actions/courses.actions';
-import { AuthService } from './services/auth.service';
+} from '../actions/courses.actions';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { of, from } from 'rxjs';
-import { SpinnerService } from './services/spinner.service';
-import { CoursesService } from './services/courses.service';
+import { SpinnerService } from '../services/spinner.service';
+import { CoursesService } from '../services/courses.service';
 
 @Injectable()
-export class AppEffects {
+export class AuthEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
               private coursesService: CoursesService,
@@ -43,8 +44,7 @@ export class AppEffects {
 
   @Effect()
   logout$ = this.actions$.pipe(
-    ofType<Login>(AuthActionTypes.Logout),
-    map(action => action.payload),
+    ofType<Logout>(AuthActionTypes.Logout),
     map(() =>
       this.authService.logout()
     )
@@ -65,18 +65,5 @@ export class AppEffects {
     tap(() => {
       this.spinnerService.hide();
     })
-  );
-
-  // Courses effects
-
-  @Effect()
-  get$ = this.actions$.pipe(
-    ofType<Get>(CoursesActionTypes.Get),
-    map(action => action.payload),
-    exhaustMap((page) =>
-      this.coursesService.getCourses(page).pipe(
-        map(courses => new GetSuccess(courses)),
-      )
-    )
   );
 }

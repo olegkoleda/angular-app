@@ -42,4 +42,5 @@ export type CoursesActionsUnion =
   | Add
   | Remove
   | Edit
-  | Get;
+  | Get
+  | GetSuccess;

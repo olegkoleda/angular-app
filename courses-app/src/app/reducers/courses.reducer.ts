@@ -7,11 +7,17 @@ export interface CoursesState {
   }
 
   export const initialcoursesState: CoursesState = {
-    courses: null,
+    courses: [],
   };
 
 export function coursesReducer(state = initialcoursesState, action: CoursesActionsUnion) {
     switch (action.type) {
+      case CoursesActionTypes.GetSuccess: {
+        return {
+          ...state,
+          courses: [...state.courses, ...action.payload],
+        };
+      }
 
       default: {
         return state;

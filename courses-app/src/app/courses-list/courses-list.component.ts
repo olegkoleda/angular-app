@@ -35,31 +35,19 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.store.dispatch(new CoursesActions.Get(this.page));
-
-  //   this.store
-  // .pipe(
-  //   select(appState.selectAllCourses),
-  // )
-  // .subscribe((res: Course[]) => {
-  //   this.coursesData = [...this.coursesData, ...res];
-  //   this.spinnerService.hide();
-  // });
-    this.courses$ = this.store.pipe(select(appState.selectAllCourses));
-    console.log(this.courses$);
-    console.log(this.courses$);
-    // this.getCourses(this.page);
+    this.store
+    .pipe(
+      select(appState.selectAllCourses),
+    )
+    .subscribe((res: Course[]) => {
+      this.coursesData = [...this.coursesData, ...res];
+    });
+    this.getCourses(this.page);
   }
 
-  // public getCourses(page): void {
-  //   this.spinnerService.show();
-  //   this.getCoursesSubscription = this.coursesService
-  //     .getCourses(page)
-  //     .subscribe((res: Course[]) => {
-  //       this.coursesData = [...this.coursesData, ...res];
-  //       this.spinnerService.hide();
-  //     });
-  // }
+  public getCourses(page): void {
+    this.store.dispatch(new CoursesActions.Get(page));
+  }
 
   public deleteCourse(courseId): void {
     this.spinnerService.show();
