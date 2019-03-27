@@ -33,6 +33,7 @@ export class AuthService {
   public logout(): void {
     this.router.navigate(['login']);
     localStorage.removeItem(this.key);
+    this.store.dispatch(new AuthActions.Logout());
   }
 
   public isAuthenticated (): boolean {

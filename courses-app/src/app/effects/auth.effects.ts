@@ -42,13 +42,6 @@ export class AuthEffects {
     )
   );
 
-  @Effect()
-  logout$ = this.actions$.pipe(
-    ofType<Logout>(AuthActionTypes.Logout),
-    map(() =>
-      this.authService.logout()
-    )
-  );
 
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$.pipe(
