@@ -26,7 +26,6 @@ import { CoursesService } from '../services/courses.service';
 export class AuthEffects {
   constructor(private actions$: Actions,
               private authService: AuthService,
-              private coursesService: CoursesService,
               private router: Router,
               private spinnerService: SpinnerService) {}
 
@@ -34,11 +33,13 @@ export class AuthEffects {
   login$ = this.actions$.pipe(
     ofType<Login>(AuthActionTypes.Login),
     map(action => action.payload),
-    exhaustMap((auth) =>
-      this.authService.login(auth).pipe(
+    exhaustMap((auth) => {
+      this.spinnerService.show();    
+      return this.authService.login(auth).pipe(
         map(token => new LoginSuccess({ token })),
         catchError(error => of(new LoginFailure(error)))
       )
+    }
     )
   );
 

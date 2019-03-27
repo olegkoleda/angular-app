@@ -6,6 +6,7 @@ export enum CoursesActionTypes {
   GetSuccess = '[Courses] GetSuccess',
   Add = '[Courses] Add',
   Remove = '[Courses] Remove',
+  RemoveSuccsess = '[Courses] RemoveSuccsess',
   Edit = '[Courses] Edit',
 }
 
@@ -32,6 +33,12 @@ export class Remove implements Action {
   constructor(public payload: {id: number}) {}
 }
 
+export class RemoveSuccsess implements Action {
+  readonly type = CoursesActionTypes.RemoveSuccsess;
+
+  constructor(public payload: {id: number}) {}
+}
+
 export class Edit implements Action {
   readonly type = CoursesActionTypes.Edit;
 
@@ -41,6 +48,7 @@ export class Edit implements Action {
 export type CoursesActionsUnion =
   | Add
   | Remove
+  | RemoveSuccsess
   | Edit
   | Get
   | GetSuccess;

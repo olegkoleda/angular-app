@@ -6,7 +6,8 @@ import {
   Get,
   GetSuccess,
   Add,
-  Remove
+  Remove,
+  RemoveSuccsess
 } from '../actions/courses.actions';
 import { map, exhaustMap, catchError, tap } from 'rxjs/operators';
 import { SpinnerService } from '../services/spinner.service';
@@ -22,10 +23,29 @@ export class CoursesEffects {
   get$ = this.actions$.pipe(
     ofType<Get>(CoursesActionTypes.Get),
     map(action => action.payload),
-    exhaustMap((page) =>
-      this.coursesService.getCourses(page).pipe(
-        map(courses => new GetSuccess(courses)),
-      )
-    )
+    exhaustMap((page) => {
+        this.spinnerService.show();
+        return this.coursesService.getCourses(page).pipe(
+          map(courses => {
+            this.spinnerService.hide();
+            return new GetSuccess(courses);
+            }),
+        )
+    })
+  );
+
+  @Effect()
+  remove$ = this.actions$.pipe(
+    ofType<Remove>(CoursesActionTypes.Remove),
+    map(action => action.payload),
+    exhaustMap((id) => {
+        this.spinnerService.show();
+        return this.coursesService.deleteCourse(id).pipe(
+          map(() => {
+            this.spinnerService.hide();
+            return new RemoveSuccsess(id);
+            }),
+        )
+    })
   );
 }

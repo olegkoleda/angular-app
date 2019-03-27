@@ -17,6 +17,12 @@ export function coursesReducer(state = initialcoursesState, action: CoursesActio
           courses: [...state.courses, ...action.payload],
         };
       }
+      
+      case CoursesActionTypes.RemoveSuccsess: {
+        return {
+          courses: state.courses.filter( course => course.id !== action.payload),
+        };
+      }
 
       default: {
         return state;

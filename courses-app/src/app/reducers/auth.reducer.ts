@@ -13,7 +13,6 @@ export function authReducer(state = initialAuthState, action: AuthActionsUnion) 
     switch (action.type) {
       case AuthActionTypes.LoginSuccess: {
         return {
-          ...state,
           token: action.payload.token,
         };
       }

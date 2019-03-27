@@ -19,22 +19,19 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   public course: Course[];
   public initialData: Course[] = [];
 
-  private page = 0;
   private getCoursesSubscription;
   private filterCoursesSubscription;
   private deleteCoursesSubscription;
-  private courses$: Observable<Course[]>;
 
   constructor(
     private coursesService: CoursesService,
     private spinnerService: SpinnerService,
     private store: Store<appState.State>
-  ) {
-    // this.courses$ = store.pipe(select('courses'));
-}
+  ) {}
 
 
   ngOnInit() {
+    this.getCoursesSubscription =
     this.store
     .pipe(
       select(appState.selectAllCourses),
@@ -42,23 +39,18 @@ export class CoursesListComponent implements OnInit, OnDestroy {
     .subscribe((res: Course[]) => {
       this.coursesData = [...this.coursesData, ...res];
     });
-    this.getCourses(this.page);
+    this.getCourses(0);
   }
 
-  public getCourses(page): void {
+  public getCourses(page?): void {
     this.store.dispatch(new CoursesActions.Get(page));
   }
 
   public deleteCourse(courseId): void {
-    this.spinnerService.show();
-    this.deleteCoursesSubscription = this.coursesService.deleteCourse(courseId).subscribe(res => {
-      this.coursesData = this.coursesData.filter( course => course.id !== courseId);
-      this.spinnerService.hide();
-    });
+    this.store.dispatch(new CoursesActions.Remove(courseId));
   }
 
   public loadMore(page: number): void {
-    this.page = page;
     this.getCourses(page);
   }
 

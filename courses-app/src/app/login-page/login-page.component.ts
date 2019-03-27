@@ -16,7 +16,6 @@ export class LoginPageComponent {
   constructor(private spinnerService: SpinnerService, private store: Store<appState.State>) { }
 
   public login(): void {
-    this.spinnerService.show();
     this.store.dispatch(new AuthActions.Login({login: this.email, password: this.password}));
   }
 }
