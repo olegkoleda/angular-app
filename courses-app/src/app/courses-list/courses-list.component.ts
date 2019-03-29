@@ -3,6 +3,10 @@ import { Course } from './course.module';
 import { CoursesFilterPipe } from '../pipes/courses-filter.pipe';
 import { CoursesService } from '../services/courses.service';
 import { SpinnerService } from '../services/spinner.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as appState from '../reducers';
+import * as  CoursesActions from '../actions/courses.actions';
 
 @Component({
   selector: 'app-courses-list',
@@ -15,40 +19,38 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   public course: Course[];
   public initialData: Course[] = [];
 
-  private page = 0;
   private getCoursesSubscription;
   private filterCoursesSubscription;
   private deleteCoursesSubscription;
 
   constructor(
     private coursesService: CoursesService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private store: Store<appState.State>
   ) {}
 
+
   ngOnInit() {
-    this.getCourses(this.page);
+    this.getCoursesSubscription =
+    this.store
+    .pipe(
+      select(appState.selectAllCourses),
+    )
+    .subscribe((res: Course[]) => {
+      this.coursesData = [...this.coursesData, ...res];
+    });
+    this.getCourses(0);
   }
 
-  public getCourses(page): void {
-    this.spinnerService.show();
-    this.getCoursesSubscription = this.coursesService
-      .getCourses(page)
-      .subscribe((res: Course[]) => {
-        this.coursesData = [...this.coursesData, ...res];
-        this.spinnerService.hide();
-      });
+  public getCourses(page?): void {
+    this.store.dispatch(new CoursesActions.Get(page));
   }
 
   public deleteCourse(courseId): void {
-    this.spinnerService.show();
-    this.deleteCoursesSubscription = this.coursesService.deleteCourse(courseId).subscribe(res => {
-      this.coursesData = this.coursesData.filter( course => course.id !== courseId);
-      this.spinnerService.hide();
-    });
+    this.store.dispatch(new CoursesActions.Remove(courseId));
   }
 
   public loadMore(page: number): void {
-    this.page = page;
     this.getCourses(page);
   }
 

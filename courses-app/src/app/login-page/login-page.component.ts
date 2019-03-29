@@ -1,34 +1,21 @@
-import { Component, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { SpinnerService } from '../services/spinner.service';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../actions/auth.actions';
+import * as appState from '../reducers';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements OnDestroy {
+export class LoginPageComponent {
   private email = '';
   private password = '';
-  private loginSubscription;
 
-  constructor(private authService: AuthService, private router: Router, private spinnerService: SpinnerService) { }
+  constructor(private spinnerService: SpinnerService, private store: Store<appState.State>) { }
 
   public login(): void {
-    this.spinnerService.show();
-    this.loginSubscription = this.authService.login(this.email, this.password).subscribe((res) => {
-      this.spinnerService.hide();
-      this.router.navigate(['courses']);
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this.spinnerService.hide();
-      }
-      );
-  }
-  ngOnDestroy(): void {
-    this.loginSubscription.unsubscribe();
+    this.store.dispatch(new AuthActions.Login({login: this.email, password: this.password}));
   }
 }
