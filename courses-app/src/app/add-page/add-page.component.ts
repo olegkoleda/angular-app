@@ -11,10 +11,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AddPageComponent implements OnInit {
   private new = true;
-  private name: string;
-  private description: string;
-  private date: Date;
-  private length: number;
   private courseId: number;
   private courseData: Course;
 
@@ -33,31 +29,25 @@ export class AddPageComponent implements OnInit {
 
   ngOnInit() {
     this.courseId = parseInt(this.route.snapshot.params.id, 10);
-
     if (this.courseId) {
       this.new = false;
       this.coursesService.getById(`${this.courseId}`).subscribe(res => {
         this.courseData = res;
-        this.name = this.courseData.name;
-        this.description = this.courseData.description;
-        this.length = this.courseData.length;
-        this.date = this.courseData.date;
+        this.addForm.setValue({
+          name: this.courseData.name,
+          description: this.courseData.description,
+          length: {length: this.courseData.length},
+          date: {date: this.courseData.date}
+        });
       });
     }
   }
 
-  public click() {
-    console.log( this.addForm);
-  }
-
-  public save() {
+  public onSubmit() {
     if (this.new) {
       this.coursesService
         .createCourse({
-          name: this.name,
-          date: this.date,
-          length: this.length,
-          description: this.description,
+          ...this.addForm.value,
           isTopRated: true
         })
         .subscribe(res => {
