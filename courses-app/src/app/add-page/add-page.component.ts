@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
 import { Course } from '../courses-list/course.module';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-page',
@@ -10,12 +11,15 @@ import { Course } from '../courses-list/course.module';
 })
 export class AddPageComponent implements OnInit {
   private new = true;
-  private name: string;
-  private description: string;
-  private date: Date;
-  private length: number;
   private courseId: number;
   private courseData: Course;
+
+  public addForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    description: new FormControl('', [Validators.required, Validators.maxLength(500)]),
+    date: new FormControl(''),
+    length: new FormControl(''),
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -25,27 +29,25 @@ export class AddPageComponent implements OnInit {
 
   ngOnInit() {
     this.courseId = parseInt(this.route.snapshot.params.id, 10);
-
     if (this.courseId) {
       this.new = false;
       this.coursesService.getById(`${this.courseId}`).subscribe(res => {
         this.courseData = res;
-        this.name = this.courseData.name;
-        this.description = this.courseData.description;
-        this.length = this.courseData.length;
-        this.date = this.courseData.date;
+        this.addForm.setValue({
+          name: this.courseData.name,
+          description: this.courseData.description,
+          length: {length: this.courseData.length},
+          date: {date: this.courseData.date}
+        });
       });
     }
   }
 
-  public save() {
+  public onSubmit() {
     if (this.new) {
       this.coursesService
         .createCourse({
-          name: this.name,
-          date: this.date,
-          length: this.length,
-          description: this.description,
+          ...this.addForm.value,
           isTopRated: true
         })
         .subscribe(res => {

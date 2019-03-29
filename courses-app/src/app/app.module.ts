@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +21,8 @@ import { AddPageComponent } from './add-page/add-page.component';
 import { NotExistingPageComponent } from './not-existing-page/not-existing-page.component';
 import { AuthInterceptor } from './comon/authInterceptor';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { FormDateComponent } from './add-page/form-date/form-date.component';
+import { FormDurationComponent } from './add-page/form-duration/form-duration.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -47,12 +49,15 @@ import { CoursesEffects } from './effects/courses.effects';
     AddPageComponent,
     NotExistingPageComponent,
     SpinnerComponent,
+    FormDateComponent,
+    FormDurationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AuthEffects, CoursesEffects])

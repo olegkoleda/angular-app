@@ -1,0 +1,5 @@
+<form [formGroup] ="durationForm" (ngSubmit) = "onSubmit()">
+  <label for="duration">Duration</label>
+  <input type="number" formControlName="length">
+  <pre *ngIf="length">{{durationForm | async | duration}}</pre>
+</form>

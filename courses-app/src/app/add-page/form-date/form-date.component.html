@@ -1,0 +1,4 @@
+<form [formGroup] ="dateForm" (ngSubmit) = "onSubmit()">
+  <label for="date">Start date</label>
+  <input type="date" formControlName="date" (change)=onTouched()>
+</form>
