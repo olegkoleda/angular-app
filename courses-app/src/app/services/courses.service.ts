@@ -14,11 +14,13 @@ const httpOptions = {
 export class CoursesService {
   private BASE_URL = 'http://localhost:3004/courses';
   private countToLoad = '10';
+  private page = 0;
 
   constructor(private http: HttpClient) {}
 
-  public getCourses(page, textFragment?: string): Observable<Course[]> {
-    const params = { start: `${page * +this.countToLoad}`, count: this.countToLoad };
+  public getCourses(newPage?, textFragment?: string): Observable<Course[]> {
+    this.page = newPage;
+    const params = { start: `${this.page * +this.countToLoad}`, count: this.countToLoad };
     return this.http.get<Course[]>(this.BASE_URL, {
       params: (textFragment) ? {textFragment, ...params} : params
     });
@@ -26,7 +28,6 @@ export class CoursesService {
 
   public createCourse(courseData: Object) {
     const options = JSON.stringify(courseData);
-    console.log(options);
     return this.http.post<any>(this.BASE_URL, options, httpOptions).pipe(map(resp => resp));
   }
 
