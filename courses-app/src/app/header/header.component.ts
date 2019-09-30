@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public logout() {
-    this.authService.logout();
+    this.store.dispatch(new AuthActions.Logout());
   }
 
   public isAuth(): boolean {
